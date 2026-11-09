@@ -10,12 +10,10 @@ public class YahtzeeDice {
 
 
 	// Constructors: 2 different overloaded ones.
-	// Each forgot to do something.
-	// ***(1) What did I forget here?  What is the consequence?
 	public YahtzeeDice() {  
 		dice = new Die[NUM_OF_DICE];
 		for(int i = 0; i < NUM_OF_DICE; i++) {
-			dice[i] = new Die();
+			dice[i] = new Die(); 
 		}
 	}
 
@@ -60,11 +58,25 @@ public class YahtzeeDice {
 	//rolls all 5 dice and returns the total of the dice
 	public int roll() { 
 		int sum = 0;
-
-		for(int i = 0; i < NUM_OF_DICE; i++) {
+		
+		for (int i = 0; i < NUM_OF_DICE; i++) {
 			dice[i].roll();
 			sum += dice[i].getDieValue();
 		}
+
+		return sum; // ***(4) Design-wise, what would be wrong if we did it like this?
+	}
+
+	public int roll(boolean[] keepDice) { 
+		int sum = 0;
+		
+		for (int i = 0; i < NUM_OF_DICE; i++) {
+			if (!keepDice[i]) {  // Only roll the dice that are not kept
+				dice[i].roll();
+			}
+			sum += dice[i].getDieValue();
+		}
+
 		return sum; // ***(4) Design-wise, what would be wrong if we did it like this?
 	}
 

@@ -1,10 +1,8 @@
-
 public class Die {
 	
 	private int numSides;
 	private int dieValue;
-	
-	
+
 	public Die() {
 		numSides = 6;
 		roll();
@@ -20,19 +18,27 @@ public class Die {
 		dieValue = value;
 	}
 	
+
 	public void roll() {
-		dieValue = (int)(Math.random () * numSides) + 1;
+		dieValue = (int) (Math.random() * numSides) + 1;
 	}
 
+	/**
+	 * @return the numSides
+	 */
 	public int getNumSides() {
 		return numSides;
 	}
 
+	/**
+	 * @return the dieValue
+	 */
 	public int getDieValue() {
 		return dieValue;
 	}
 	
 	public String toString() {
-		return "The number of sides is:" +numSides+ "The die value is:" +dieValue;
+		return "# Sides: "+numSides+"   Die Value = " +dieValue;
 	}
+
 }
