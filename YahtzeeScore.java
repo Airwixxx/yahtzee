@@ -1,4 +1,4 @@
-public class YahtzeeScore extends ScoreCard {
+public class YahtzeeScore extends Score {
 	
 	public YahtzeeScore() {
 		

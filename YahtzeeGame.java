@@ -5,11 +5,24 @@ public class YahtzeeGame {
     private Scanner scanner = new Scanner(System.in);
     private YahtzeeDice gameDice;
     private int score;
-    private ScoreCard board[];
+    private Score board[];
     private boolean[] keepDice;
 
     public YahtzeeGame() {
-        this.board = new ScoreCard[13]; // Assuming 13 different scoring categories
+        this.board = new Score[13];
+        this.board[0] = new OnesScore();
+        this.board[1] = new TwosScore();
+        this.board[2] = new ThreesScore();
+        this.board[3] = new FoursScore();
+        this.board[4] = new FivesScore();
+        this.board[5] = new SixesScore();
+        this.board[6] = new ThreeOfAKindScore();
+        this.board[7] = new FourOfAKindScore();
+        this.board[8] = new FullHouseScore();
+        this.board[9] = new SmallStraightScore();
+        this.board[10] = new LargeStraightScore();
+        this.board[11] = new YahtzeeScore();
+        this.board[12] = new ChanceScore();
     }
 
     public void printWelcomeMessage() {
@@ -82,13 +95,5 @@ public class YahtzeeGame {
 	public void setScore(int score) {
 		this.score = score;
 	}
-
-	// public ScoreCard getBoard() {
-	// 	return board;
-	// }
-
-	// public void setBoard(ScoreCard board) {
-	// 	this.board = board;
-	// }
 
 }

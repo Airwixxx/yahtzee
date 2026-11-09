@@ -1,4 +1,4 @@
-public class OnesScore extends ScoreCard {
+public class OnesScore extends Score {
 	
 	public OnesScore() {
 	

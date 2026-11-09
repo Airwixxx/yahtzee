@@ -1,4 +1,4 @@
-public class LargeStraightScore extends ScoreCard {
+public class LargeStraightScore extends Score {
 	
 	public LargeStraightScore() {
 

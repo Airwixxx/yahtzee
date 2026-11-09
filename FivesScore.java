@@ -1,4 +1,4 @@
-public class FivesScore extends ScoreCard {
+public class FivesScore extends Score {
 	
 	public FivesScore() {
 

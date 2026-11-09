@@ -1,4 +1,4 @@
-public class ChanceScore extends ScoreCard {
+public class ChanceScore extends Score {
 	
 	public ChanceScore() {
 
