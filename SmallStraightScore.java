@@ -4,19 +4,25 @@ public class SmallStraightScore extends Score {
 
 	}
 	
-	
 	public int calculateScore(int[] values) {
-		int score = 0;
 		int[] counts = new int[7];
-		for(int i = 0; i < values.length; i++) {
+		for (int i = 0; i < values.length; i++) {
 			counts[values[i]]++;
 		}
-		if((counts[1] >= 1 && counts[2] >= 1 && counts[3] >= 1
-				&& counts[4] >= 1) || (counts[2] >= 1 && counts[3] >= 1
-				&& counts[4] >= 1 && counts[5] >= 1) || (counts[3] >= 1
-				&& counts[4] >= 1 && counts[5] >= 1 && counts[6] >= 1)) {
-			score = 30;
+
+		boolean hasSmallStraight = false;
+		for (int start = 1; start <= 3; start++) {
+			if (counts[start] > 0
+					&& counts[start + 1] > 0
+					&& counts[start + 2] > 0
+					&& counts[start + 3] > 0) {
+				hasSmallStraight = true;
+			}
+		}
+
+		if (hasSmallStraight = true) {
+			return 30;
 		}
 		return 0;
-	} 
+	}
 }
