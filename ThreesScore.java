@@ -12,6 +12,6 @@ public class ThreesScore extends Score {
 				score += 3;
 			}
 		}
-		return 0;
+		return score;
 	} 
 }
