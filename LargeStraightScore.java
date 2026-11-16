@@ -10,8 +10,9 @@ public class LargeStraightScore extends Score {
 		for(int i = 0; i < values.length; i++) {
 			counts[values[i]]++;
 		}
-		if((counts[1] >= 1 && counts[2] >= 1 && counts[3] >= 1 && counts[4] >= 1) || (counts[2] >= 1 && counts[3] >= 1 && counts[4] >= 1 && counts[5] >= 1) || (counts[3] >= 1 && counts[4] >= 1 && counts[5] >= 1 && counts[6] >= 1)) {
-			score = 30;
+		if ((counts[1] == 1 && counts[2] == 1 && counts[3] == 1 && counts[4] == 1 && counts[5] == 1)
+				|| (counts[2] == 1 && counts[3] == 1 && counts[4] == 1 && counts[5] == 1 && counts[6] == 1)) {
+			score = 40;
 		}
 		return score;
 	}

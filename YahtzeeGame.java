@@ -1,3 +1,5 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class YahtzeeGame {
@@ -7,6 +9,11 @@ public class YahtzeeGame {
     private int score;
     private Score board[];
     private boolean[] keepDice;
+    private final String[] scoreNames = {
+        "Ones", "Twos", "Threes", "Fours", "Fives", "Sixes",
+        "Three of a Kind", "Four of a Kind", "Full House",
+        "Small Straight", "Large Straight", "Yahtzee", "Chance"
+    };
 
     public YahtzeeGame() {
         this.board = new Score[13];
@@ -32,19 +39,89 @@ public class YahtzeeGame {
     }
 
     public void playRound() {
-        YahtzeeDice yahtzeeDice = new YahtzeeDice();
+        if (allScoresUsed()) {
+            System.out.println("All scoring categories have already been used.");
+            return;
+        }
+
+        gameDice = new YahtzeeDice();
         keepDice = new boolean[5];
 
         for (int rollNumber = 1; rollNumber <= 3; rollNumber++) {
-            int rollTotal = yahtzeeDice.roll(keepDice);
-            System.out.println("You rolled: " + java.util.Arrays.toString(yahtzeeDice.getDiceValues()) + " Total: " + rollTotal);
+            int rollTotal = gameDice.roll(keepDice);
+            int[] diceValues = gameDice.getDiceValues();
+            System.out.println("You rolled: " + java.util.Arrays.toString(diceValues) + " Total: " + rollTotal);
+            displayPossibleScores(diceValues);
             if (rollNumber == 3 || !reroll()) {
                 break;
             }
-            keepDice = getKeptDice(yahtzeeDice);
+            keepDice = getKeptDice(gameDice);
         }
 
-        System.out.println("Final roll: " + java.util.Arrays.toString(yahtzeeDice.getDiceValues()));
+        System.out.println("Final roll: " + java.util.Arrays.toString(gameDice.getDiceValues()));
+        chooseScore(gameDice.getDiceValues());
+        System.out.println("Current total score: " + score);
+    }
+
+    public int playGame() {
+        while (!allScoresUsed()) {
+            playRound();
+        }
+        System.out.println("Game over! Final score: " + score);
+        return score;
+    }
+
+    public Map<String, Integer> getPossibleScores(int[] diceValues) {
+        Map<String, Integer> possibleScores = new LinkedHashMap<>();
+        for (int i = 0; i < board.length; i++) {
+            if (!board[i].isUsed()) {
+                possibleScores.put(scoreNames[i], board[i].calculateScore(diceValues));
+            }
+        }
+        return possibleScores;
+    }
+
+    public void displayPossibleScores(int[] diceValues) {
+        System.out.println("Available scoring options:");
+        for (Map.Entry<String, Integer> entry : getPossibleScores(diceValues).entrySet()) {
+            System.out.println("  " + entry.getKey() + ": " + entry.getValue() + " points");
+        }
+    }
+
+    private void chooseScore(int[] diceValues) {
+        while (true) {
+            System.out.println("Choose a scoring category:");
+            for (int i = 0; i < board.length; i++) {
+                if (!board[i].isUsed()) {
+                    System.out.println((i + 1) + ". " + scoreNames[i] + " - "
+                            + board[i].calculateScore(diceValues) + " points");
+                }
+            }
+
+            String response = scanner.nextLine();
+            try {
+                int choice = Integer.parseInt(response) - 1;
+                if (choice >= 0 && choice < board.length && !board[choice].isUsed()) {
+                    int roundScore = board[choice].calculateScore(diceValues);
+                    board[choice].setUsed(true);
+                    score += roundScore;
+                    System.out.println("Scored " + roundScore + " points in " + scoreNames[choice] + ".");
+                    return;
+                }
+            } catch (NumberFormatException ignored) {
+               
+            }
+            System.out.println("Invalid or already-used category. Enter an available category number.");
+        }
+    }
+
+    private boolean allScoresUsed() {
+        for (Score scoreCategory : board) {
+            if (!scoreCategory.isUsed()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean reroll() {
