@@ -5,6 +5,7 @@ public class ThreeOfAKindScore extends Score {
 	}
 	
 	public int calculateScore(int[] values) {
+		checkUsed();
 		int score = 0;
 		int[] counts = new int[7]; 
 		for(int i = 0; i < values.length; i++) {
@@ -15,9 +16,11 @@ public class ThreeOfAKindScore extends Score {
 				for(int j = 0; j < values.length; j++) {
 					score += values[j];
 				}
+				setUsed(true);
 				return score;
 			}
 		}
+		setUsed(true);
 		return 0;
 	} 
 }

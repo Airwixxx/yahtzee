@@ -5,15 +5,23 @@ public class LargeStraightScore extends Score {
 	}
 	
 	public int calculateScore(int[] values) {
-		int score = 0;
+		checkUsed();
+		if (values.length != 5) {
+			setUsed(true);
+			return 0;
+		}
+
 		int[] counts = new int[7];
 		for(int i = 0; i < values.length; i++) {
 			counts[values[i]]++;
 		}
-		if ((counts[1] == 1 && counts[2] == 1 && counts[3] == 1 && counts[4] == 1 && counts[5] == 1)
-				|| (counts[2] == 1 && counts[3] == 1 && counts[4] == 1 && counts[5] == 1 && counts[6] == 1)) {
-			score = 40;
+
+		if ((counts[1] > 0 && counts[2] > 0 && counts[3] > 0 && counts[4] > 0 && counts[5] > 0)
+				|| (counts[2] > 0 && counts[3] > 0 && counts[4] > 0 && counts[5] > 0 && counts[6] > 0)) {
+			setUsed(true);
+			return 40;
 		}
-		return score;
+		setUsed(true);
+		return 0;
 	}
 }

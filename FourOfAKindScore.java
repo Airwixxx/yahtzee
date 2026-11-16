@@ -5,6 +5,7 @@ public class FourOfAKindScore extends Score {
 	}
 	
 	public int calculateScore(int[] values) {
+		checkUsed();
 		int[] counts = new int[7];
 		for(int i = 0; i < values.length; i++) {
 			counts[values[i]]++;
@@ -15,9 +16,11 @@ public class FourOfAKindScore extends Score {
 				for (int i = 0; i < values.length; i++) {
 					sum += values[i];
 				}
+				setUsed(true);
 				return sum;
 			}
 		}
+		setUsed(true);
 		return 0;
 	} 
 }

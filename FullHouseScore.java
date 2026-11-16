@@ -5,6 +5,7 @@ public class FullHouseScore extends Score {
 	}
 	
 	public int calculateScore(int[] values) {
+		checkUsed();
 		
 		
 		int[] counts = new int[7];
@@ -21,8 +22,10 @@ public class FullHouseScore extends Score {
 			}
 		}
 		if(hasThree && hasTwo) {
+			setUsed(true);
 			return 25;
 		}
+		setUsed(true);
 		return 0;
 	}
 }

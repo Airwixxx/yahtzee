@@ -12,6 +12,12 @@ public abstract class Score {
         this.values = values;
     }
 
+    public void checkUsed() {
+        if (isUsed) {
+            throw new IllegalStateException("Score has already been used.");
+        }
+    }
+
     public int[] getValues() {
         return values;
     }
