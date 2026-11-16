@@ -1,6 +1,6 @@
+import java.util.Scanner;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class YahtzeeGame {
 
@@ -108,8 +108,9 @@ public class YahtzeeGame {
                     System.out.println("Scored " + roundScore + " points in " + scoreNames[choice] + ".");
                     return;
                 }
-            } catch (NumberFormatException ignored) {
-               
+            } catch (NumberFormatException exception) {
+            	System.out.println("Enter the number of an available category. Can't be negative");
+                continue;
             }
             System.out.println("Invalid or already-used category. Enter an available category number.");
         }
