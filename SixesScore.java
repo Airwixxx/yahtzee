@@ -10,8 +10,7 @@ public class SixesScore extends Score {
 			if (values[i] == 6) {
 				score +=6;
 			}
-			return score;
 		}
-		return 0;
+		return score;
 	} 
 }

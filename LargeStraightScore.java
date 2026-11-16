@@ -5,33 +5,14 @@ public class LargeStraightScore extends Score {
 	}
 	
 	public int calculateScore(int[] values) {
+		int score = 0;
 		int[] counts = new int[7];
-		for (int i = 0; i < values.length; i++) {
+		for(int i = 0; i < values.length; i++) {
 			counts[values[i]]++;
 		}
-
-		boolean hasLargeStraight = true;
-		for (int face = 1; face <= 5; face++) {
-			if (counts[face] == 0) {
-				hasLargeStraight = false;
-				break;
-			}
+		if((counts[1] >= 1 && counts[2] >= 1 && counts[3] >= 1 && counts[4] >= 1) || (counts[2] >= 1 && counts[3] >= 1 && counts[4] >= 1 && counts[5] >= 1) || (counts[3] >= 1 && counts[4] >= 1 && counts[5] >= 1 && counts[6] >= 1)) {
+			score = 30;
 		}
-		if (hasLargeStraight) {
-			return 40;
-		}
-
-		hasLargeStraight = true;
-		for (int face = 2; face <= 6; face++) {
-			if (counts[face] == 0) {
-				hasLargeStraight = false;
-				break;
-			}
-		}
-		if (hasLargeStraight) {
-			return 40;
-		}
-
-		return 0;
-	} 
+		return score;
+	}
 }
